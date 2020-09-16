@@ -1,4 +1,4 @@
-import { actions } from "./botActions";
+import botActions from "./botActions";
 
 export type BotMessage = {
   type: "confirmation" | "message_new";
@@ -23,4 +23,4 @@ export type BotMessage = {
   event_id: string;
 };
 
-export type BotAction = typeof actions[0];
+export type BotAction = typeof botActions[0];

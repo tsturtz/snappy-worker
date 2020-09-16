@@ -4,7 +4,7 @@ import { ACCESS_TOKEN, VK_API_VERSION, VK_API_ENDPOINT } from "./config";
 const vkApiRequest = async (method: string, data: any) => {
   try {
     const params = new URLSearchParams();
-    params.append("random_id", `${Math.round(Math.random() * 1000000000000)}`);
+    params.append("random_id", `${Math.round(Math.random() * 10 ** 17)}`);
 
     for (let key in data) {
       const value = data[key];

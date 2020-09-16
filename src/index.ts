@@ -4,9 +4,10 @@ dotenv.config();
 import express from "express";
 import { BotMessage } from "./types";
 import { CONFIRMATION, PORT } from "./config";
-import actionEventEmitter from "./actionEventEmitter";
+import botEvent from "./botEvent";
 import parseAction from "./parseAction";
-import { actions } from "./botActions";
+import botActions from "./botActions";
+import "./botHandlers";
 
 const server = express();
 
@@ -19,11 +20,11 @@ server.post("/", (req, res) => {
     return res.send(CONFIRMATION);
   }
   if (type === "message_new") {
-    const action = actions.find((action) =>
+    const action = botActions.find((action) =>
       parseAction(object.message.text).toLowerCase().includes(action)
     );
 
-    if (action) actionEventEmitter.dispatch(action, object.message);
+    if (action) botEvent.emit(action, object.message);
   }
 
   console.log(req.body);
