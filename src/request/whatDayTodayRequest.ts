@@ -1,7 +1,7 @@
 import fetch from "./fetch";
 
 const getRandomNames = (names: string[]) => {
-  const randomIndex = Math.floor(Math.random() * names.length);
+  const randomIndex = Math.round(Math.random() * names.length);
 
   return names[randomIndex];
 };

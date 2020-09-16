@@ -3,7 +3,6 @@ import nodeFetch from "node-fetch";
 type Method = "GET" | "POST";
 
 export class RequestError {
-  requestError = true;
   message = "Что-то не так, попробуй еще раз 🤯";
 }
 

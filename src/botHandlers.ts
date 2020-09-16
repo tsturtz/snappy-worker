@@ -3,7 +3,7 @@ import currencyRequest from "./request/currencyRequest";
 import { RequestError } from "./request/fetch";
 import getQuoteRequest from "./request/getQuoteRequest";
 import whatDayTodayRequest from "./request/whatDayTodayRequest";
-import { editChat, sendMessage } from "./vkApi";
+import { editChat, getGroupPosts, sendMessage } from "./vkApi";
 
 botEvent.on("какой сегодня день", async (message) => {
   try {
@@ -57,5 +57,26 @@ botEvent.on("цитатка", async (message) => {
     if (error instanceof RequestError) {
       sendMessage(message.peer_id, error.message);
     }
+  }
+});
+
+botEvent.on("хочу мем", async (message) => {
+  try {
+    const fourchanGroupID = 45745333;
+    const postsCount = 100;
+
+    const posts = await getGroupPosts(fourchanGroupID, postsCount);
+    const postsPhotos = posts
+      .flatMap((post) => post.attachments)
+      .filter((attachment) => attachment.type === "photo");
+
+    const { photo } = postsPhotos[Math.round(Math.random() * postsCount)];
+
+    sendMessage(
+      message.peer_id,
+      `photo${-fourchanGroupID}_${photo.id}_${photo.access_key}`
+    );
+  } catch (error) {
+    sendMessage(message.peer_id, "Не получилось 😔");
   }
 });
