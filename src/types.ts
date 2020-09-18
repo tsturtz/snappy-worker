@@ -24,17 +24,3 @@ export type BotMessage = {
 };
 
 export type BotAction = typeof botActions[0];
-
-export type GroupPost = {
-  items: {
-    id: number;
-    owner_id: number;
-    attachments: {
-      type: string;
-      photo: {
-        id: number;
-        access_key: string;
-      };
-    }[];
-  }[];
-};

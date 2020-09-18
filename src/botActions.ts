@@ -4,5 +4,4 @@ export default [
   "курс доллара" as const,
   "курс евро" as const,
   "цитатка" as const,
-  "хочу мем" as const,
 ];
