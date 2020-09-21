@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
+import morgan from "morgan";
 import { BotMessage } from "./types";
 import { CONFIRMATION, PORT } from "./config";
 import botEvent from "./botEvent";
@@ -10,6 +11,7 @@ import botActions from "./botActions";
 import "./botHandlers";
 
 const server = express();
+server.use(morgan("combined"));
 
 server.use(express.json());
 
