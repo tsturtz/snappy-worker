@@ -24,11 +24,11 @@ const vkApiRequest = async (method: string, data: any) => {
       await fetch(`${VK_API_ENDPOINT}${method}?${params.toString()}`)
     ).json();
 
-    console.log(response);
+    if (response.error) {
+      throw response.error;
+    }
   } catch (error) {
     console.error("VK api request error:", error);
-
-    throw error;
   }
 };
 
@@ -63,7 +63,7 @@ export const botStart = (peer_id: number) => {
               payload: '{"button": "1"}',
               label: "Изменить название",
             },
-            color: "primary",
+            color: "positive",
           },
           {
             action: {
@@ -73,11 +73,31 @@ export const botStart = (peer_id: number) => {
             },
             color: "negative",
           },
+        ],
+        [
           {
             action: {
               type: "text",
               payload: '{"button": "3"}',
               label: "Курс доллара",
+            },
+            color: "secondary",
+          },
+          {
+            action: {
+              type: "text",
+              payload: '{"button": "4"}',
+              label: "Какой сегодня день",
+            },
+            color: "primary",
+          },
+        ],
+        [
+          {
+            action: {
+              type: "text",
+              payload: '{"button": "5"}',
+              label: "Цитатка",
             },
             color: "secondary",
           },
