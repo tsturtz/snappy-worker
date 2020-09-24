@@ -1,3 +1,4 @@
+import { getRandomNumber } from "../utils";
 import fetch from "./fetch";
 
 type Response = {
@@ -7,7 +8,7 @@ type Response = {
 const getQuoteRequest = async () => {
   try {
     const maxQuoteID = 999999;
-    const quoteID = Math.floor(Math.random() * maxQuoteID);
+    const quoteID = getRandomNumber(maxQuoteID);
     const { quoteText }: Response = await (
       await fetch(
         `https://api.forismatic.com/api/1.0/?method=getQuote&key=${quoteID}&format=json&lang=ru`

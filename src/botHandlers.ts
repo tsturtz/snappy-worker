@@ -3,8 +3,9 @@ import { ALEX_NICKNAME, ALEX_VK_ID } from "./constants";
 import currencyRequest from "./request/currencyRequest";
 import { RequestError } from "./request/fetch";
 import getQuoteRequest from "./request/getQuoteRequest";
-import whatDayTodayRequest from "./request/whatDayTodayRequest";
+import getCurrentDayNamesRequest from "./request/getCurrentDayNamesRequest";
 import { botStart, editChat, sendMessage } from "./vkApi";
+import { getRandomNumber } from "./utils";
 
 botEvent.on("старт", (message) => {
   try {
@@ -16,8 +17,14 @@ botEvent.on("старт", (message) => {
 
 botEvent.on("какой сегодня день", async (message) => {
   try {
-    const dayToday = await whatDayTodayRequest();
-    sendMessage(message.peer_id, `✅ ${dayToday}`);
+    const dayNames = await getCurrentDayNamesRequest();
+    const randomDay = dayNames[getRandomNumber(dayNames.length)];
+
+    if (!randomDay) {
+      throw new RequestError();
+    }
+
+    sendMessage(message.peer_id, randomDay);
   } catch (error: unknown) {
     if (error instanceof RequestError) {
       sendMessage(message.peer_id, error.message);
@@ -27,9 +34,14 @@ botEvent.on("какой сегодня день", async (message) => {
 
 botEvent.on("изменить название", async (message) => {
   try {
-    const dayToday = await whatDayTodayRequest();
+    const dayNames = await getCurrentDayNamesRequest();
+    const randomDay = dayNames[getRandomNumber(dayNames.length)];
 
-    editChat(message.peer_id - 2000000000, dayToday);
+    if (!randomDay) {
+      throw new RequestError();
+    }
+
+    editChat(message.peer_id - 2000000000, randomDay);
   } catch (error: unknown) {
     if (error instanceof RequestError) {
       sendMessage(message.peer_id, error.message);

@@ -1,15 +1,9 @@
 import fetch from "./fetch";
 
-const getRandomNames = (names: string[]) => {
-  const randomIndex = Math.floor(Math.random() * names.length);
-
-  return names[randomIndex];
-};
-
 let lastRequestDate = 0;
-let cachedDaysNames: string[] = [];
+let cachedNames: string[] = [];
 
-const whatDayTodayRequest = async () => {
+const getCurrentDayNamesRequest = async () => {
   try {
     const currentDate = new Date().getDate();
 
@@ -22,15 +16,14 @@ const whatDayTodayRequest = async () => {
       const daysNames = [
         ...htmlContent.matchAll(/<span itemprop="text">(.*?)<\/span>/g),
       ].flatMap((item) => item[1].split(" (")[0]);
-      cachedDaysNames = daysNames;
 
-      return getRandomNames(daysNames);
+      cachedNames = daysNames;
     }
 
-    return getRandomNames(cachedDaysNames);
+    return cachedNames;
   } catch (error) {
     throw error;
   }
 };
 
-export default whatDayTodayRequest;
+export default getCurrentDayNamesRequest;

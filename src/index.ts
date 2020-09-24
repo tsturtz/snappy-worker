@@ -7,6 +7,7 @@ import { CONFIRMATION, PORT } from "./config";
 import botEvent from "./botEvent";
 import parseAction from "./parseAction";
 import botActions from "./botActions";
+import apiRouter from "./api/apiRouter";
 import "./botHandlers";
 
 const server = express();
@@ -31,6 +32,8 @@ server.post("/", (req, res) => {
 
   return res.send("ok");
 });
+
+server.use("/api", apiRouter);
 
 const onServerStarted = () => {
   console.log(`Server started on port ${PORT}`);
