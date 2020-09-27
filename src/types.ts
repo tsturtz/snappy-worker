@@ -24,3 +24,8 @@ export type BotMessage = {
 };
 
 export type BotAction = typeof botActions[0];
+
+export type RequestError = {
+  status?: number;
+  message?: string;
+};

@@ -7,7 +7,8 @@ import { CONFIRMATION, PORT } from "./config";
 import botEvent from "./botEvent";
 import parseAction from "./parseAction";
 import botActions from "./botActions";
-import apiRouter from "./api/apiRouter";
+import apiRouter from "./apiRouter";
+import { errorHandler, logErrors } from "./middleware";
 import "./botHandlers";
 
 const server = express();
@@ -34,9 +35,9 @@ server.post("/", (req, res) => {
 });
 
 server.use("/api", apiRouter);
+server.use(logErrors);
+server.use(errorHandler);
 
-const onServerStarted = () => {
+server.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
-};
-
-server.listen(PORT, onServerStarted);
+});
