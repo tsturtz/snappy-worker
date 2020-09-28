@@ -1,27 +1,21 @@
 import fetch from "node-fetch";
 import { ACCESS_TOKEN, VK_API_VERSION, VK_API_ENDPOINT } from "./config";
 
-const vkApiRequest = async (method: string, data: any) => {
+const vkApiRequest = async (method: string, body: any) => {
   try {
     const params = new URLSearchParams();
     params.append("random_id", `${Math.round(Math.random() * 10 ** 17)}`);
-
-    for (let key in data) {
-      const value = data[key];
-
-      if (value !== undefined) {
-        params.append(
-          key,
-          typeof value === "string" ? value : JSON.stringify(value)
-        );
-      }
-    }
-
     params.append("access_token", ACCESS_TOKEN);
     params.append("v", VK_API_VERSION);
 
     const response = await (
-      await fetch(`${VK_API_ENDPOINT}${method}?${params.toString()}`)
+      await fetch(`${VK_API_ENDPOINT}${method}?${params.toString()}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
     ).json();
 
     if (response.error) {
