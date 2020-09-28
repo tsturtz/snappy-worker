@@ -4,6 +4,7 @@ import currencyRequest from "./request/currencyRequest";
 import { RequestError } from "./request/fetch";
 import getQuoteRequest from "./request/getQuoteRequest";
 import getCurrentDayNamesRequest from "./request/getCurrentDayNamesRequest";
+import getNewsRequest from "./request/getNewsRequest";
 import { botStart, editChat, sendMessage } from "./vkApi";
 import { getRandomNumber } from "./utils";
 
@@ -93,4 +94,17 @@ botEvent.on("напомнить леше", (message) => {
       `[id${ALEX_VK_ID}|@${ALEX_NICKNAME}] Когда идем в аквапарк? 🗿`
     );
   } catch (error) {}
+});
+
+botEvent.on("новости ростова", async (message) => {
+  try {
+    const news = await getNewsRequest();
+    const formatString = news.map((item) => item.title).join("\n");
+
+    sendMessage(message.peer_id, formatString);
+  } catch (error) {
+    if (error instanceof RequestError) {
+      sendMessage(message.peer_id, error.message);
+    }
+  }
 });

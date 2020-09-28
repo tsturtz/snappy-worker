@@ -10,7 +10,6 @@ router.get("/what-day-today", async (_req, res, next) => {
     res.json(dayNames);
   } catch (error) {
     next({
-      status: 400,
       message: "Что-то не так, попробуй еще раз 🤯",
     });
   }

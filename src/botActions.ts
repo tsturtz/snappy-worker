@@ -6,4 +6,5 @@ export default [
   "курс евро" as const,
   "цитатка" as const,
   "напомнить леше" as const,
+  "новости ростова" as const,
 ];
