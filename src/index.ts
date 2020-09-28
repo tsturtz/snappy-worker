@@ -17,7 +17,7 @@ const server = express();
 server.use(morgan("common"));
 server.use(express.json());
 
-server.post("/", (req, res) => {
+server.post("/vk-bot", (req, res) => {
   const { type, object } = req.body as BotMessage;
 
   if (type === "confirmation") {
