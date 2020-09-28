@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tar czf project.tar.gz src .env package.json package-lock.json tsconfig.json
+tar czf project.tar.gz public src .env package.json package-lock.json tsconfig.json
 scp project.tar.gz root@82.148.19.60:~
 rm -rf project.tar.gz
 
