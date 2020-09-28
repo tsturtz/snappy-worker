@@ -26,6 +26,7 @@ export type BotMessage = {
 export type BotAction = typeof botActions[0];
 
 export type RequestError = {
+  error: Error,
   status?: number;
   message?: string;
 };

@@ -9,7 +9,7 @@ import botEvent from "./botEvent";
 import parseAction from "./parseAction";
 import botActions from "./botActions";
 import apiRouter from "./apiRouter";
-import { errorHandler, logErrors } from "./middleware";
+import { errorHandler } from "./middleware";
 import "./botHandlers";
 
 const server = express();
@@ -37,7 +37,6 @@ server.post("/vk-bot", (req, res) => {
 });
 
 server.use("/api", apiRouter);
-server.use(logErrors);
 server.use(errorHandler);
 
 server.listen(PORT, () => {
