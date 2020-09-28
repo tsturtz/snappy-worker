@@ -1,5 +1,5 @@
 import xmlParser from "fast-xml-parser";
-import fetch from "./fetch";
+import fetch, { RequestError } from "./fetch";
 
 type News = {
   title: string;
@@ -7,15 +7,17 @@ type News = {
   description: string;
 };
 
-const getNewsRequest = async () => {
+const getNewsRequest = async (type: string) => {
   try {
-    const response = await fetch(
-      "https://news.yandex.ru/Rostov-na-Donu/index.rss"
-    );
+    const response = await fetch(`https://news.yandex.ru/${type}.rss`);
 
-    const json = xmlParser.parse(await response.text());
+    try {
+      const json = xmlParser.parse(await response.text());
 
-    return json.rss.channel.item as News[];
+      return json.rss.channel.item as News[];
+    } catch (error) {
+      throw new RequestError();
+    }
   } catch (error) {
     throw error;
   }

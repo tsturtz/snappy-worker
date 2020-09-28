@@ -1,3 +1,37 @@
 export const ALEX_VK_ID = 39753898;
 export const ALEX_NICKNAME = "leshkagerasimov";
 export const COOL_DIALOG_ID = 127;
+
+export const newsTypes = [
+  "auto",
+  "army",
+  "world",
+  "gadgets",
+  "index",
+  "martial_arts",
+  "communal",
+  "health",
+  "games",
+  "internet",
+  "movies",
+  "koronavirus",
+  "cosmos",
+  "culture",
+  "championsleague",
+  "music",
+  "science",
+  "realty",
+  "society",
+  "politics",
+  "incident",
+  "travels",
+  "religion",
+  "sport",
+  "computers",
+  "vehicle",
+  "finances",
+  "showbusiness",
+  "ecology",
+  "business",
+  "energy",
+];

@@ -1,5 +1,5 @@
 import botEvent, { Listener } from "./botEvent";
-import { ALEX_NICKNAME, ALEX_VK_ID } from "./constants";
+import { ALEX_NICKNAME, ALEX_VK_ID, newsTypes } from "./constants";
 import currencyRequest from "./request/currencyRequest";
 import { RequestError } from "./request/fetch";
 import getQuoteRequest from "./request/getQuoteRequest";
@@ -96,12 +96,18 @@ botEvent.on("напомнить леше", (message) => {
   } catch (error) {}
 });
 
-botEvent.on("новости ростова", async (message) => {
+botEvent.on("новость", async (message) => {
   try {
-    const news = await getNewsRequest();
-    const formatString = news.map((item) => item.title).join("\n");
+    const randomNewsType = newsTypes[getRandomNumber(newsTypes.length)];
+    const news = await getNewsRequest(randomNewsType);
+    const randomNews = news[getRandomNumber(news.length)];
+    const text = [
+      `⭕ ${randomNews.title}`,
+      randomNews.description,
+      randomNews.link,
+    ].join("\n\n");
 
-    sendMessage(message.peer_id, formatString);
+    sendMessage(message.peer_id, text);
   } catch (error) {
     if (error instanceof RequestError) {
       sendMessage(message.peer_id, error.message);

@@ -1,9 +1,21 @@
 import fetch from "node-fetch";
 import { ACCESS_TOKEN, VK_API_VERSION, VK_API_ENDPOINT } from "./config";
 
-const vkApiRequest = async (method: string, body: any) => {
+const vkApiRequest = async (method: string, data: any) => {
   try {
     const params = new URLSearchParams();
+
+    for (let key in data) {
+      const value = data[key];
+
+      if (value !== undefined) {
+        params.append(
+          key,
+          typeof value === "string" ? value : JSON.stringify(value)
+        );
+      }
+    }
+
     params.append("random_id", `${Math.round(Math.random() * 10 ** 17)}`);
     params.append("access_token", ACCESS_TOKEN);
     params.append("v", VK_API_VERSION);
@@ -14,7 +26,6 @@ const vkApiRequest = async (method: string, body: any) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
       })
     ).json();
 
@@ -83,7 +94,7 @@ export const botStart = (peer_id: number) => {
               payload: '{"button": "4"}',
               label: "Какой сегодня день",
             },
-            color: "primary",
+            color: "secondary",
           },
         ],
         [
@@ -92,6 +103,14 @@ export const botStart = (peer_id: number) => {
               type: "text",
               payload: '{"button": "5"}',
               label: "Цитатка",
+            },
+            color: "secondary",
+          },
+          {
+            action: {
+              type: "text",
+              payload: '{"button": "6"}',
+              label: "Новость",
             },
             color: "secondary",
           },
