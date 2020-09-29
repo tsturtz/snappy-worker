@@ -114,3 +114,9 @@ botEvent.on("новость", async (message) => {
     }
   }
 });
+
+botEvent.on("caйтик ботяры", (message) => {
+  try {
+    sendMessage(message.peer_id, "https://snappy-worker.ru/");
+  } catch (error) {}
+});

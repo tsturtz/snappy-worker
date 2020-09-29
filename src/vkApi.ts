@@ -115,6 +115,16 @@ export const botStart = (peer_id: number) => {
             color: "secondary",
           },
         ],
+        [
+          {
+            action: {
+              type: "text",
+              payload: '{"button": "7"}',
+              label: "Caйтик ботяры",
+            },
+            color: "secondary",
+          },
+        ],
       ],
     },
   });

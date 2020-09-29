@@ -7,4 +7,5 @@ export default [
   "цитатка" as const,
   "напомнить леше" as const,
   "новость" as const,
+  "caйтик ботяры" as const,
 ];
