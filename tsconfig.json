@@ -5,13 +5,11 @@
     "module": "CommonJS",
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "Node",
-    "outDir": "./build",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
     "target": "ES6"
   },
-  "include": ["src"],
   "exclude": ["node_modules"]
 }

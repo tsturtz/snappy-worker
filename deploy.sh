@@ -1,17 +1,16 @@
 #!/bin/bash
 
-tar czf project.tar.gz public src .env package.json package-lock.json tsconfig.json
-scp project.tar.gz root@82.148.19.60:~
-rm -rf project.tar.gz
+rm -rf build
+npm run build
+tar czf build.tar.gz public build
+scp build.tar.gz root@82.148.19.60:~
+rm -rf build.tar.gz
 
 ssh root@82.148.19.60 << 'ENDSSH'
 pm2 stop snappy-worker
 rm -rf snappy-worker
 mkdir snappy-worker
-tar xf project.tar.gz -C snappy-worker
-rm -rf project.tar.gz
-cd snappy-worker
-npm ci
-npm run build
+tar xf build.tar.gz -C snappy-worker
+rm -rf build.tar.gz
 pm2 start snappy-worker
 ENDSSH
