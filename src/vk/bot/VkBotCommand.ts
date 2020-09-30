@@ -13,7 +13,11 @@ class VkBotCommand {
   async editDialogName(newTitle: string) {
     try {
       const basePublicDialogID = 2000000000;
-      editDialogName(this.message.peer_id - basePublicDialogID, newTitle);
+      const dialogID = this.message.peer_id - basePublicDialogID;
+
+      if (dialogID > 0) {
+        editDialogName(dialogID, newTitle);
+      }
     } catch (error) {}
   }
 }

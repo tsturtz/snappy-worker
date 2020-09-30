@@ -6,8 +6,8 @@ export const errorHandler = (
   res: Response,
   _next: NextFunction
 ) => {
-  const { status = 500, message = "Server Error", error } = err;
+  const { status = 500, error } = err;
   console.error(error.stack);
 
-  return res.status(status).json({ message });
+  return res.status(status).json({ message: error.message });
 };

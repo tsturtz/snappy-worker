@@ -10,7 +10,7 @@ router.get("/what-day-today", async (_req, res, next) => {
 
     res.json(dayNames);
   } catch (error) {
-    next(error);
+    next({ error });
   }
 });
 
@@ -18,7 +18,7 @@ router.get("/news", async (_req, res, next) => {
   try {
     res.json(await getNewsRequest("index"));
   } catch (error) {
-    next(error);
+    next({ error });
   }
 });
 
