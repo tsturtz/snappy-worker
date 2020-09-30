@@ -1,4 +1,4 @@
-import fetch from "./fetch";
+import fetch from "../fetch";
 
 export type Response = {
   Valute: {

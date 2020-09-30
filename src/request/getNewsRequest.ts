@@ -1,5 +1,8 @@
 import xmlParser from "fast-xml-parser";
-import fetch, { RequestError } from "./fetch";
+import { newsTypes } from "../constants";
+import fetch from "../fetch";
+import FetchError from "../fetch/FetchError";
+import { getRandomNumber } from "../helpers";
 
 type News = {
   title: string;
@@ -16,8 +19,20 @@ const getNewsRequest = async (type: string) => {
 
       return json.rss.channel.item as News[];
     } catch (error) {
-      throw new RequestError();
+      throw new FetchError(error);
     }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getRandomNewsRequest = async () => {
+  try {
+    const randomNewsType = newsTypes[getRandomNumber(newsTypes.length)];
+    const news = await getNewsRequest(randomNewsType);
+    const randomNews = news[getRandomNumber(news.length)];
+
+    return randomNews;
   } catch (error) {
     throw error;
   }

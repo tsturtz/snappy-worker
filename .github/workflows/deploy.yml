@@ -19,8 +19,6 @@ jobs:
       - name: Build
         env:
           PORT: 8080
-          VK_API_ENDPOINT: https://api.vk.com/method/
-          VK_API_VERSION: 5.124
           CONFIRMATION: da7ccfc2
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: npm run build

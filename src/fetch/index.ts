@@ -1,12 +1,11 @@
 import nodeFetch from "node-fetch";
+import FetchError from "./FetchError";
 
-type Method = "GET" | "POST";
-
-export class RequestError {
-  message = "Что-то не так, попробуй еще раз 🤯";
-}
-
-const fetch = async (url: string, method: Method = "GET", data?: any) => {
+const fetch = async (
+  url: string,
+  method: "GET" | "POST" = "GET",
+  data?: any
+) => {
   try {
     const requestOptions = {
       method,
@@ -18,9 +17,7 @@ const fetch = async (url: string, method: Method = "GET", data?: any) => {
 
     return await nodeFetch(url, requestOptions);
   } catch (error) {
-    console.log("Request error:", error);
-
-    throw new RequestError();
+    throw new FetchError(error);
   }
 };
 

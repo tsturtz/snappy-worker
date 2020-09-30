@@ -1,5 +1,5 @@
-import { getRandomNumber } from "../utils";
-import fetch from "./fetch";
+import { getRandomNumber } from "../helpers";
+import fetch from "../fetch";
 
 type Response = {
   quoteText: string;
