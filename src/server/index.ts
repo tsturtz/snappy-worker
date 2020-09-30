@@ -1,24 +1,15 @@
-import express, { Request, Response } from "express";
+import express, { Router } from "express";
 import morgan from "morgan";
 import { errorHandler } from "./middleware";
 import api from "./api";
 import { PORT } from "../config";
 
-type Route = {
-  method: "get" | "post";
-  path: string;
-  handler: (req: Request, res: Response) => void;
-};
-
-const startServer = (routes: Route[]) => {
+const startServer = (router: Router) => {
   const server = express();
-
   server.use(morgan("common"));
   server.use(express.json());
 
-  routes.forEach((route) => {
-    server[route.method](route.path, route.handler);
-  });
+  server.use(router);
 
   server.use("/api", api);
   server.use(errorHandler);

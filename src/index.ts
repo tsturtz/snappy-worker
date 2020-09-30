@@ -1,4 +1,9 @@
+import { Router } from "express";
 import server from "./server";
 import vkBot from "./vk/bot";
 
-server([{ method: "post", path: "/vk-bot", handler: vkBot.webhook }]);
+const router = Router();
+
+router.post("/vk-bot", vkBot.webhook);
+
+server(router);
