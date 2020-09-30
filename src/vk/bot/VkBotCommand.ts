@@ -1,5 +1,6 @@
 import { WebhookMessage } from "./types";
 import { sendMessage, editDialogName } from "../api/methods";
+import { EditDialogError } from "./errors";
 
 class VkBotCommand {
   constructor(private message: WebhookMessage) {}
@@ -18,7 +19,11 @@ class VkBotCommand {
       if (dialogID > 0) {
         editDialogName(dialogID, newTitle);
       }
-    } catch (error) {}
+
+      throw new EditDialogError();
+    } catch (error) {
+      throw error;
+    }
   }
 }
 

@@ -4,6 +4,7 @@ import currencyRequest from "../../request/getCurrencyRequest";
 import { getRandomDayNameRequest } from "../../request/getDayNamesRequest";
 import { getRandomNewsRequest } from "../../request/getNewsRequest";
 import getQuoteRequest from "../../request/getQuoteRequest";
+import { EditDialogError } from "./errors";
 
 import VkBot, { CommandCallback } from "./VkBot";
 
@@ -92,7 +93,7 @@ bot.command("изменить название", async (ctx) => {
 
     ctx.editDialogName(day);
   } catch (error: unknown) {
-    if (error instanceof FetchError) {
+    if (error instanceof FetchError || error instanceof EditDialogError) {
       ctx.reply(error.message);
     }
   }
