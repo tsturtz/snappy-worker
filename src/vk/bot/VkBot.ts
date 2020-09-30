@@ -7,12 +7,8 @@ import VkBotCommand from "./VkBotCommand";
 export type CommandCallback = (data: VkBotCommand) => void;
 
 class VkBot {
-  private eventEmitter;
+  private eventEmitter = new EventEmitter();
   private commands: string[] = [];
-
-  constructor() {
-    this.eventEmitter = new EventEmitter();
-  }
 
   webhook = (req: Request, res: Response) => {
     const { type, object } = req.body as WebhookRequest;
