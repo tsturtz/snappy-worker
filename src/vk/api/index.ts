@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 import { ACCESS_TOKEN } from "../../config";
 import VkApiError from "./VkApiError";
 
