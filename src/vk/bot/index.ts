@@ -91,7 +91,7 @@ bot.command("изменить название", async (ctx) => {
   try {
     const day = await getRandomDayNameRequest();
 
-    ctx.editDialogName(day);
+    await ctx.editDialogName(day);
   } catch (error: unknown) {
     if (error instanceof FetchError || error instanceof EditDialogError) {
       ctx.reply(error.message);
