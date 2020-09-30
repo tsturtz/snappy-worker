@@ -4,7 +4,7 @@ import { errorHandler } from "./middleware";
 import api from "./api";
 import { PORT } from "../config";
 
-const startServer = (router: Router) => {
+const startServer = (router: Router, onStart?: () => void) => {
   const server = express();
   server.use(morgan("common"));
   server.use(express.json());
@@ -16,6 +16,8 @@ const startServer = (router: Router) => {
 
   server.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
+
+    if (onStart) onStart();
   });
 };
 

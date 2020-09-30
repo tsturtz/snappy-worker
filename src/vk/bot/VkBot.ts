@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { CONFIRMATION } from "../../config";
 import { WebhookRequest } from "./types";
 import VkBotCommand from "./VkBotCommand";
+import { sendMessage } from "../api/methods";
 
 export type CommandHandler = (data: VkBotCommand) => void;
 
@@ -33,6 +34,12 @@ class VkBot {
   command = (command: string, commandCallback: CommandHandler) => {
     this.commands.push(command);
     this.eventEmitter.on(command, commandCallback);
+  };
+
+  send = async (dialogID: number, message: string) => {
+    try {
+      await sendMessage(dialogID, message);
+    } catch (error) {}
   };
 }
 

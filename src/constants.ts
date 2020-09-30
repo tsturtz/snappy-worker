@@ -31,3 +31,5 @@ export const newsTypes = [
   "business",
   "energy",
 ];
+
+export const bestDialogID = 2000000127;
