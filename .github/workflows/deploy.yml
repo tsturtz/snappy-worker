@@ -29,7 +29,7 @@ jobs:
         with:
           host: 82.148.19.60
           username: deployer
-          key: ${{ secrets.VKBOT_SECRET }}
+          password: ${{ secrets.DEPLOY_USER_PASSWORD }}
           source: "build,public"
           target: "/home/deployer/snappy-worker"
       - name: "Run app"
@@ -37,5 +37,5 @@ jobs:
         with:
           host: 82.148.19.60
           username: deployer
-          key: ${{ secrets.VKBOT_SECRET }}
+          password: ${{ secrets.DEPLOY_USER_PASSWORD }}
           script: pm2 restart snappy-worker

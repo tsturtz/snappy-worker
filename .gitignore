@@ -1,5 +1,7 @@
 node_modules
-.history
-npm-debug.log
-.DS_Store
 build
+
+deploy.sh
+.history
+.DS_Store
+.env
