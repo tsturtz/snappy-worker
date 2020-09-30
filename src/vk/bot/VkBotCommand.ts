@@ -17,10 +17,10 @@ class VkBotCommand {
       const dialogID = this.message.peer_id - basePublicDialogID;
 
       if (dialogID > 0) {
-        editDialogName(dialogID, newTitle);
+        await editDialogName(dialogID, newTitle);
+      } else {
+        throw new EditDialogError();
       }
-
-      throw new EditDialogError();
     } catch (error) {
       throw error;
     }
