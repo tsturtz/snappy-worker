@@ -4,7 +4,7 @@ import { CONFIRMATION } from "../../config";
 import { WebhookRequest } from "./types";
 import VkBotCommand from "./VkBotCommand";
 
-export type CommandCallback = (data: VkBotCommand) => void;
+export type CommandHandler = (data: VkBotCommand) => void;
 
 class VkBot {
   private eventEmitter = new EventEmitter();
@@ -30,7 +30,7 @@ class VkBot {
     return res.send("ok");
   };
 
-  command = (command: string, commandCallback: CommandCallback) => {
+  command = (command: string, commandCallback: CommandHandler) => {
     this.commands.push(command);
     this.eventEmitter.on(command, commandCallback);
   };

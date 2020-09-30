@@ -22,4 +22,15 @@ router.get("/news", async (_req, res, next) => {
   }
 });
 
+router.get("/time", (_req, res) => {
+  const date = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Europe/Moscow" })
+  );
+
+  res.json({
+    day: date.getDate(),
+    month: date.getMonth() + 1,
+  });
+});
+
 export default router;
