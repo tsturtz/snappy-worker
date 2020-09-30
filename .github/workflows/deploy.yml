@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
 
-ssh-conf:
+.ssh-conf:
   host: 82.148.19.60
   username: deployer
   password: ${{ secrets.DEPLOY_USER_PASSWORD }}
@@ -32,12 +32,12 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           extends:
-            - ssh-conf
+            - .ssh-conf
           source: "build,public"
           target: "/home/deployer/snappy-worker"
       - name: "Run app"
         uses: appleboy/ssh-action@master
         with:
           extends:
-            - ssh-conf
+            - .ssh-conf
           script: pm2 restart snappy-worker
