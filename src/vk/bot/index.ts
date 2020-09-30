@@ -3,6 +3,7 @@ import { formatCurrency } from "../../helpers";
 import currencyRequest from "../../request/getCurrencyRequest";
 import { getRandomDayNameRequest } from "../../request/getDayNamesRequest";
 import { getRandomNewsRequest } from "../../request/getNewsRequest";
+import getQuoteRequest from "../../request/getQuoteRequest";
 
 import VkBot, { CommandCallback } from "./VkBot";
 
@@ -126,6 +127,18 @@ bot.command("новость", async (ctx) => {
 
     ctx.reply(text);
   } catch (error) {
+    if (error instanceof FetchError) {
+      ctx.reply(error.message);
+    }
+  }
+});
+
+bot.command("цитатка", async (ctx) => {
+  try {
+    const quote = await getQuoteRequest();
+
+    ctx.reply(quote);
+  } catch (error: unknown) {
     if (error instanceof FetchError) {
       ctx.reply(error.message);
     }
