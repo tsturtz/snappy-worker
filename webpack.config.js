@@ -1,6 +1,7 @@
 const path = require("path");
 const { EnvironmentPlugin } = require("webpack");
 const dotenv = require("dotenv");
+dotenv.config();
 
 module.exports = (_env, argv) => {
   return {
@@ -22,6 +23,14 @@ module.exports = (_env, argv) => {
         },
       ],
     },
-    plugins: [new EnvironmentPlugin(Object.keys(dotenv.config().parsed || {}))],
+    plugins: [
+      new EnvironmentPlugin([
+        "PORT",
+        "CONFIRMATION",
+        "ACCESS_TOKEN",
+        "VK_API_ENDPOINT",
+        "VK_API_VERSION",
+      ]),
+    ],
   };
 };

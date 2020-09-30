@@ -3,3 +3,11 @@ export const ACCESS_TOKEN = process.env.ACCESS_TOKEN ?? "";
 export const CONFIRMATION = process.env.CONFIRMATION ?? "";
 export const VK_API_ENDPOINT = process.env.VK_API_ENDPOINT ?? "";
 export const VK_API_VERSION = process.env.VK_API_VERSION ?? "";
+
+console.log({
+  PORT,
+  ACCESS_TOKEN,
+  CONFIRMATION,
+  VK_API_ENDPOINT,
+  VK_API_VERSION,
+});
