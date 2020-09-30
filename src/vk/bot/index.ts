@@ -60,8 +60,6 @@ bot.command("старт", (ctx) => {
             },
             color: "secondary",
           },
-        ],
-        [
           {
             action: {
               type: "text",
