@@ -3,7 +3,7 @@ import { getRandomDayNameRequest } from "../../../request/getDayNamesRequest";
 import { EditDialogError } from "../errors";
 import { CommandHandler } from "../VkBot";
 
-const changeDialogName: CommandHandler = async (ctx) => {
+const setRandomDialogName: CommandHandler = async (ctx) => {
   try {
     const day = await getRandomDayNameRequest();
 
@@ -15,4 +15,4 @@ const changeDialogName: CommandHandler = async (ctx) => {
   }
 };
 
-export default changeDialogName;
+export default setRandomDialogName;

@@ -1,28 +1,28 @@
-import changeDialogName from "./handlers/changeDialogName";
+import setRandomDialogName from "./handlers/setRandomDialogName";
 import getCurrency from "./handlers/getCurrency";
 import getNews from "./handlers/getNews";
 import getQuote from "./handlers/getQuote";
 import start from "./handlers/start";
 import getWhatDayToday from "./handlers/getWhatDayToday";
+import getBotCommands from "./handlers/getBotCommands";
 
-import VkBot from "./VkBot";
+import VkBot, { Command, CommandHandler, commands } from "./VkBot";
 import getSite from "./handlers/getSite";
 
 const bot = new VkBot();
 
-bot.command("старт", start);
+const handlers: Record<Command, CommandHandler> = {
+  старт: start,
+  "какой сегодня день": getWhatDayToday,
+  "случайное название чата": setRandomDialogName,
+  "курс доллара": getCurrency,
+  "курс евро": getCurrency,
+  новость: getNews,
+  цитатка: getQuote,
+  "caйтик ботяры": getSite,
+  команды: getBotCommands,
+};
 
-bot.command("какой сегодня день", getWhatDayToday);
-
-bot.command("изменить название", changeDialogName);
-
-bot.command("курс доллара", getCurrency);
-bot.command("курс евро", getCurrency);
-
-bot.command("новость", getNews);
-
-bot.command("цитатка", getQuote);
-
-bot.command("caйтик ботяры", getSite);
+commands.forEach((command) => bot.command(command, handlers[command]));
 
 export default bot;

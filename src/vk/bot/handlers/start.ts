@@ -11,7 +11,7 @@ const start: CommandHandler = (ctx) => {
             action: {
               type: "text",
               payload: '{"button": "1"}',
-              label: "Изменить название",
+              label: "Случайное название чата",
             },
             color: "positive",
           },
