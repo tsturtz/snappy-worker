@@ -19,7 +19,7 @@ jobs:
       - name: Build
         env:
           PORT: 8080
-          CONFIRMATION: da7ccfc2
+          CONFIRMATION: 21ec6e4b
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: npm run build
       - name: Copy build to the server
@@ -27,7 +27,7 @@ jobs:
         with:
           host: 82.148.19.60
           username: deployer
-          password: ${{ secrets.DEPLOY_USER_PASSWORD }}
+          key: ${{ secrets.DEPLOY_KEY }}
           source: "build,public"
           target: "/home/deployer/snappy-worker"
       - name: "Run app"
@@ -35,5 +35,5 @@ jobs:
         with:
           host: 82.148.19.60
           username: deployer
-          password: ${{ secrets.DEPLOY_USER_PASSWORD }}
+          key: ${{ secrets.DEPLOY_KEY }}
           script: pm2 restart snappy-worker
