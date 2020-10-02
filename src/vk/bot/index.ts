@@ -5,6 +5,7 @@ import getQuote from "./handlers/getQuote";
 import start from "./handlers/start";
 import getWhatDayToday from "./handlers/getWhatDayToday";
 import getBotCommands from "./handlers/getBotCommands";
+import setDialogName from './handlers/setDialogName';
 
 import VkBot, { Command, CommandHandler, commands } from "./VkBot";
 import getSite from "./handlers/getSite";
@@ -21,6 +22,7 @@ const handlers: Record<Command, CommandHandler> = {
   цитатка: getQuote,
   "caйтик ботяры": getSite,
   команды: getBotCommands,
+  "изменить название": setDialogName,
 };
 
 commands.forEach((command) => bot.command(command, handlers[command]));

@@ -11,6 +11,7 @@ export const commands = [
   "старт" as const,
   "какой сегодня день" as const,
   "случайное название чата" as const,
+  "изменить название" as const,
   "курс доллара" as const,
   "курс евро" as const,
   "новость" as const,
@@ -34,6 +35,9 @@ export const commandsMeta: Record<Command, CommandMeta> = {
   цитатка: { description: "Получить случайную цитатку" },
   "caйтик ботяры": { description: "Получить ссылку на сайт бота" },
   команды: { description: "Получить все команды бота" },
+  "изменить название": {
+    description: "Установить название чата (поддерживаются параметры)",
+  },
 };
 
 class VkBot {
