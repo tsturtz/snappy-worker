@@ -1,3 +1,6 @@
 export class EditDialogError extends Error {
-  message = "Не могу в этом чате 🤯";
+  constructor(message: string) {
+    super(message);
+    this.message = message;
+  }
 }

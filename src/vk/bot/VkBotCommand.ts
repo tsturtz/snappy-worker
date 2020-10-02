@@ -19,7 +19,7 @@ class VkBotCommand {
       if (dialogID > 0) {
         await editDialogName(dialogID, newTitle);
       } else {
-        throw new EditDialogError();
+        throw new EditDialogError("Не могу в этом чате 🤯");
       }
     } catch (error) {
       throw error;
